@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.min.js"></script>
+	<script src="Angular/app.js"></script>
+</head>
+<body ng-app="myModule">
+	<div ng-controller="myController">
+		<table>
+			<thead>
+				<tr>
+					<th>Question Name</th>
+					<th>Answers</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="question in questions">
+					<td>{{question.QuestionName}}</td>
+					<td>{{question.Answers}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

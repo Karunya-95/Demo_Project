@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "Instruction";
+}
+
+<html>
+<head>
+	<title>HTML 5</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<style>
+		.previous 
+		{
+			background-color: #4CAF50;
+			color: white;
+		}
+		.next 
+		{
+			background-color: #4CAF50;
+			color: white;
+		}
+		a 
+		{
+			text-decoration: none;
+			display: inline-block;
+			padding: 8px 16px;
+		}
+		a:hover 
+		{
+				background-color: #ddd;
+				color: black;
+		}
+		body 
+		{
+			font-family: Times New Roman;
+			font-size:20px;
+		}
+		jumbotron 
+		{
+			padding:40px 7px 2px 3px;
+			text-align:center;
+		}
+		.btn-primary 
+		{
+			float: right;
+		}
+		body {
+			/*background-image: url(/content/images/bgm4.jpg);
+			background-repeat: no-repeat;
+			background-size: cover;*/
+			background-color: #636;
+			font-family: Cambria;
+			color: #ffffff; 
+		}
+	</style>
+</head>
+<body>
+<img src="~/Content/Images/ejyle logo.png" /><span style="font-size:250%;font-family:Cambria;color:#ffffff">Ejyle</span>
+	<div style="font-size:30px;">
+
+		@if (Session["UseerId"] != null)
+		{ <text>
+			Welcome @Session["UseerId"].ToString() </text>
+		}
+	</div>
+	<header>
+		<h1 class="header" style="text-align:center"> Candidate Instructions <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Logout</button>
+<div class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content" style="padding-left:50px;">
+			<div class="modal-header" ><h4>Logout <i class="fa fa-lock"></i></h4></div>
+			<div class="modal-body"><i class="fa fa-question-circle"></i> Are you sure you want to log-off?</div>
+			<div class="modal-footer"><a href="javascript:;" type="submit" class="btn btn-info " onclick="window.location.href='Index';">Logout</a> <a href="javascript:;" type="submit" class="btn btn-danger">Cancel</a></div>
+
+		</div>
+	</div>
+</div>
+		</h1>
+
+	</header>		
+			<p> <u><b> About Question Paper:</b> </p> </u>
+		<p> 1) The Question Paper consist of multiple choice objective type questions with 5 options out of which only 1 is correct</p>
+		<p> 2) The computer based exam will be in English </p>
+		<p> 3) There is a TIMER (clock) available on the TOP RIGHT HAND CORNER of the screen; You are requested to keep an eye on it for knowing the time remaining for the competition of the exam</p>
+		<p> 4) Each question carry one mark</p>
+		<p> 5) Every correct answer will get 1 mark. </p>
+		<p> 6) Only one question will be displayed on the computer screen at a time.To attempt next question the candidate should click on <button type="button" class="btn btn-primary-outline">Next Question</button> or go back to cilck on<button type="button" class="btn btn-primary-outline">Previous Button</button>button provided at the bottom of the screen </p>
+		<p> 7) The Questions can be answered in any order within the given time frame.The candidate should click the mouse on the correct choice,from 4 options given. In case,the candidate does not wish to attempt any question,it can't be left blank.</p>
+		<p>    8) To move back and forth between questions, candidate should use the <button type="button" class="btn btn-primary-outline">Next Question</button> OR <button type="button" class="btn btn-primary-outline">Previous Question</button></p>
+		<p> 9) The answers will be saved whenever the candidate goes for the next question, by clicking on <button type="button" class="btn btn-primary-outline">Next Question</button>OR<button type="button" class="btn btn-primary-outline">Previous Question</button> button </p>
+		<p> 10) The candidate will only be able submit the test on completion of the stipulated 60 mins.In case a candidate not completed his/her test at the completion of stipulated 60 mins,the system shall automatically submit the test </p>
+		<p style="padding-left:450px;"> <label>  "ALL THE BEST"  </label> </p>
+		<p style="padding-left:450px;"> <button type="button" id="StartExam" class="btn btn-success" onclick="window.location.href='Questionnaire';">I have read the instructions</button> </p>
+		<footer>
+			<p> &copyrights; 2016 xxxxxxx. All rights reserved. </p>
+		</footer>
+</body>
+</html>

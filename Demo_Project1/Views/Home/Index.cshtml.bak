@@ -1,0 +1,255 @@
+﻿@{
+	ViewBag.Title = "Home Page";
+}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://code.angularjs.org/1.2.6/angular.js"></script>
+<script src="~/Scripts/toastr.min.js"></script>
+<link href="~/Content/toastr.min.css" rel="stylesheet" />
+<body id="gradient">
+	<img src="~/Content/Images/ejyle logo.png" /><span style="font-size:500%;font-family:Cambria;color:#ffffff">Ejyle</span>
+	<div id="LoginForm" class="bgm">
+		<div class=" col-md-6">
+			<div class="container">
+				<div style="font-family:Cambria;color:#ffffff" class="col-md-offset-3 alert alert-warning">
+					<form id="login" type=get action="Instruction.cshtml">
+						<div class="form-group">
+							<label for="email">User Name:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+								<input type="text" name="user_name" class="form-control" id="loginUserName" placeholder="Enter Username" ControlToValidate="txtUserName">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="pwd">Password:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+								<input type="password" class="form-control" id="loginPassword" placeholder="Enter password" ControlToValidate="txtPwd">
+							</div>
+						</div>
+						<div class="checkbox">
+							<label> <input type="checkbox"> Remember me</label>
+						</div>
+						<button type="button" class="btn btn-success" id="logindata"><i class="glyphicon glyphicon-log-in"></i>&nbsp;LogIn</button>
+						@*<label id="lblStatus" runat="server" Text="" />*@
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6" id="regis">
+			<div style="font-family:Cambria;color:#ffffff" class="col-md-offset-3 alert alert-warning">
+				<div class="container">
+					<form>
+						<h4> New User </h4>
+						<input type="button" class="btn btn-info " id="register" value="Register Here">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div style="font-family:Cambria;color:#ffffff" id="regbox" >
+		<form id="RegForm">
+			<h2>Registration Form</h2>
+			<div class="form-group">
+				<label>User Name</label>
+				<input type="text" id="user_name" name="user_name" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label>DOB</label>
+				<input type="datetime-local" id="dob" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label>E-MailID</label>
+				<input type="text" id="mail_id" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label>Password</label>
+				<input type="password" id="password" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label>Confirm Password</label>
+				<input type="password" id="confirm_password" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label>Phone Number</label>
+				<input type="tel" id="phone_number" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label>Address</label>
+				<input type="text" id="Address" class="form-control" />
+			</div>
+
+			<input type="button" class="btn btn-info " id="submit" value="Register">
+
+			<input type="button" class="btn btn-danger " id="cancel" value="Cancel">
+
+		</form>
+	</div>
+
+	
+</body>
+<style>
+	#regis {
+		padding-top: 220px;
+	}
+
+	/*form {
+				padding: 20px;
+				border: 2px solid black;
+			}*/
+
+	.col-md-6 {
+		padding-top: 140px;
+	}
+	#regbox {
+		padding-left: 410px;
+	}
+	/*#loginform {
+				background-image: url('../images/bgm2.jpg');
+			}*/
+    body {
+        /*background-image: url(/content/images/bgm4.jpg);
+		background-repeat: no-repeat;
+		background-size: cover;*/
+        background-color: #636;
+    }
+</style>
+<script type="text/javascript">
+
+	$('#RegForm').hide();
+	$('#LoginForm').show();
+	$('#logindata').click(function (e) {
+        var user_name = $("#loginUserName").val();
+		var password = $("#loginPassword").val();
+		$.ajax({
+			type: "POST",
+			url: "/Home/ValidateUser",
+            data: { "user_name": user_name, "password": password },
+			success: function (response) {
+
+				if (response.status == "Success") {
+					var url = '@Url.Action("Instruction", "Home")';
+								window.location.href = url;
+				}
+				else
+					toastr["error"]("Wrong Credentials!!! Invalid User Name and Password", "Error");
+					//alert("Login Failed!");
+					refreshData();
+
+			},
+			//failure: function (response) {
+			//	alert(response.responseText);
+			//},
+			error: function (response) {
+			toastr["error"]("Invalid User Name and Password", "Error");
+				//alert("Invalid UserName and Password!");			}
+		});
+	});
+	$('#register').click(function (e) {
+		$('#RegForm').show();
+		$('#LoginForm').hide();
+		return;
+	});
+	$('#cancel').click(function (e) {
+		refreshData();
+		alert('You will be redirected to Home Page!!!!!');
+		$('#RegForm').hide();
+		$('#LoginForm').show();
+		return;
+	});
+	$('#login').click(function (e) {
+		$('#RegForm').hide();
+		$('#LoginForm').show();
+	});
+
+
+	function refreshData() {
+        $('#user_name').val("");
+        $('#dob').val("");
+        $('#mail_id').val("");
+        $('#password').val("");
+        $('#confirm_password').val("");
+        $('#phone_number').val("");
+        $('#Address').val("");
+		$("#loginUserName").val("");
+		$("#loginPassword").val("");
+	}
+	$('#submit').click(function (e) {
+        var user_name = $('#user_name').val();
+        var dob = $('#dob').val();
+        var mail_id = $('#mail_id').val();
+        var password = $('#password').val();
+        var confirm_password = $('#confirm_password').val();
+        var phone_number = $('#phone_number').val();
+        var Address = $('#Address').val();
+
+		//Validations
+        if (user_name == null || user_name == "") {
+			alert("User Name can't be blank ");
+			return false;
+		}
+
+		//if (validateEmail(mail_id)) {
+		//    alert('Nice!! your Email is valid, now you can continue..');
+		//}
+		//else {
+		//    alert('Invalid Email Address');
+		//    return false;
+		//}
+        if (dob == null || dob == " ") {
+			alert("Pick the date");
+			return false;
+		}
+
+        if (mail_id == null || mail_id == " ") {
+			alert("Enter the mail id");
+			return false;
+		}
+
+        if (password == null || password == "") {
+			alert("Password can't be blank ");
+			return false;
+		}
+        if (confirm_password == null || confirm_password == "") {
+			alert("ConfirmPassword can't be blank ");
+			return false;
+		}
+        if (phone_number == null || phone_number == "") {
+			alert("enter the phone number");
+			return false;
+		}
+        if (isNaN(phone_number)) {
+			alert("Phone_Number  is not a number ");
+			return false;
+		}
+
+        if (Address == null || Address == "") {
+			alert("Address can't be blank");
+			return false;
+		}
+
+		$.ajax({
+			url: "/Home/SaveDetailedInfo",
+			type: "POST",
+            data: { 'user_name': user_name, 'dob': dob, 'mail_id': mail_id, 'password': password, 'confirm_password': confirm_password, 'phone_number': phone_number, 'Address': Address },
+			success: function (data) {
+				if (data.status == "Success") {
+					toastr["success"]("Registration is done!!!", "Success");
+
+					//alert("Done");
+					refreshData();
+					$('#RegForm').hide();
+					$('#LoginForm').show();
+				} else {
+					alert("Error occurs on the Database level!");
+				}
+			},
+			error: function () {
+				alert("Please fill the form");
+				//$('#RegForm').hide();
+				//$('#LoginForm').show();
+			}
+		});
+	});
+</script>
