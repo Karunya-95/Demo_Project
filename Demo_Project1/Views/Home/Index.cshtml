@@ -1,114 +1,137 @@
-﻿@{
-	ViewBag.Title = "Home Page";
-}
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="http://code.angularjs.org/1.2.6/angular.js"></script>
-<script src="~/Scripts/toastr.min.js"></script>
-<link href="~/Content/toastr.min.css" rel="stylesheet" />
-<body id="gradient">
-	<img src="~/Content/Images/ejyle logo.png" /><span style="font-size:500%;font-family:Cambria;color:#ffffff">Ejyle</span>
-	<div id="LoginForm" class="bgm">
-		<div class=" col-md-6">
-			<div class="container">
-				<div style="font-family:Cambria;color:#ffffff" class="col-md-offset-3 alert alert-warning">
-					<form id="login" type=get action="Instruction.cshtml">
-						<div class="form-group">
-							<label for="email" style="color:black">User Name:</label>
-							<div class="input-group">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-								<input type="text" name="user_name" class="form-control" id="loginUserName" placeholder="Enter Username" ControlToValidate="txtUserName">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="pwd" style="color:black">Password:</label>
-							<div class="input-group">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-								<input type="password" class="form-control" id="loginPassword" placeholder="Enter password" ControlToValidate="txtPwd">
-							</div>
-						</div>
-						<div class="checkbox">
-							<label style="color:black"> <input type="checkbox" > Remember me</label>
-						</div>
-						<button type="button" class="btn btn-success" id="logindata"><i class="glyphicon glyphicon-log-in"></i>&nbsp;LogIn</button>
-						@*<label id="lblStatus" runat="server" Text="" />*@
-					</form>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-md-6" id="regis">
-			<div style="font-family:Cambria;color:#ffffff" class="col-md-offset-3 alert alert-warning">
-				<div class="container">
-					<form>
-						<h4 style="color:black"> New User </h4>
-						<input type="button" class="btn btn-info " id="register" value="Register Here">
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-   
-	<div style="font-family:Cambria;color:#ffffff" id="regbox" >
-		<form id="RegForm" action="#" method="post">
-			<h2>Registration Form</h2>
-            <p> <span style="color:red">  * </span> Mandatory Fields</p>
-			<div class="form-group">
-				<label>User Name  <span style="color:red">  * </span> </label>
-				<input type="text" id="user_name" name="user_name" class="form-control" required />
-			</div>
-			<div class="form-group">
-				<label>DOB <span style="color:red">  * </span></label>
-				<input type="date" id="dob" class="form-control" required/>
-			</div>
-			<div class="form-group">
-                
-				<label for="email">E-MailID <span style="color:red">  * </span></label>
-				<input type="text" id="mail_id" class="form-control mail_id" required />
-                <span id="error" style="display:none;color:red;">Not an Valid email</span>
-			</div>
-			<div class="form-group">
-				<label>Password <span style="color:red">  * </span></label>
-				<input type="password" id="password" name="password" class="form-control" />
-			</div>
-			<div class="form-group">
-				<label>Confirm Password <span style="color:red">  * </span></label>
-				<input type="password" id="confirm_password" name="confirm_password" class="form-control"/>
-                <span id="message" style="display:none;color:red;">Password Doesn't Match</span>
-			</div>
-			<div class="form-group">
-				<label>Phone Number <span style="color:red">  * </span></label>
-				<input type="tel" id="phone_number" class="form-control" required/>
-			</div>
-			<div class="form-group">
-				<label>Address <span style="color:red">  * </span></label>
-				<input type="text" id="Address" class="form-control" required/>
-			</div>
-			<input type="button" class="btn btn-info " id="submit" value="Register">
-			<input type="button" class="btn btn-danger " id="cancel" value="Cancel">
+﻿<html>
+<head >
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+	<div class="login-page" >
+	  <div class="form">
+		<form class="register-form">
+		  <input type="text" placeholder="User Name" id="user_name" name="user_name" class="form-control"/>
+		   <input type="date" placeholder="DOB" id="dob" class="form-control"/>
+		    <input type="text" placeholder="Mail Id" id="mail_id" class="form-control mail_id"/>
+		  <input type="password" placeholder="password" id="password" name="password" class="form-control"/>
+		  <input type="password" placeholder="Confirm Password"  id="confirm_password" name="confirm_password" class="form-control"/>
+		   <input type="tel" placeholder="Phone Number" id="phone_number" class="form-control"/>
+		    <input type="text" placeholder="Address" id="Address" class="form-control"/>
+		  <button id="submit">create</button>
+		  <p class="message">Already registered? <a href="#">Sign In</a></p>
 		</form>
-	</div>	
+		<form class="login-form" id="login">
+		  <input type="text" placeholder="username" name="user_name" class="form-control" id="loginUserName"  ControlToValidate="txtUserName"/>
+		  <input type="password" placeholder="password" class="form-control" id="loginPassword" ControlToValidate="txtPwd"/>
+		  <button id="logindata" class="log">login</button>
+		  <p class="message" id="log" >Not registered? <a href="#">Create an account</a></p>
+		</form>
+	  </div>
+	</div>
 </body>
 <style>
-	#regis {
-		padding-top: 220px;
-	}
-	.col-md-6 {
-		padding-top: 140px;
-	}
-	#regbox {
-		padding-left: 410px;
-	}
-    body {
-        background-color: #636;
-    }
-
-    /*media only screen and  {
-        max-width:form{max-width:300px;}
-    }*/
+url(https://fonts.googleapis.com/css?family=Roboto:300);
+.login-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #43A047;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.container:before, .container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.container .info {
+  margin: 50px auto;
+  text-align: center;
+}
+.container .info h1 {
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+.container .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+.container .info span .fa {
+  color: #EF3B3A;
+}
+body {
+  background: #76b852; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+  background: -moz-linear-gradient(right, #76b852, #8DC26F);
+  background: -o-linear-gradient(right, #76b852, #8DC26F);
+  background: linear-gradient(to left, #76b852, #8DC26F);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;      
+}
 </style>
-<script type="text/javascript">
+</html>
 
+<script type="text/javascript">
+$('.message a').click(function(){
+   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+});
 
     $('.mail_id').on('keypress', function () {
         var re = /([A-Z0-9a-z_-][^@@])+?@@[^$#<>?]+?\.[\w]{2,4}/.test(this.value);
@@ -131,11 +154,7 @@
             $('#message').hide();
         }
     });
-
-
-    $('#RegForm').hide();
-    $('#LoginForm').show();
-
+    
     $(document).ready(function () {
         // enter keyd
         $(document).bind('keypress', function (e) {
@@ -166,36 +185,17 @@
            
             error: function () {
                 toastr["info"]("Error occurs on the Database level!", "Info");
-                //alert("Error occurs on the Database level!");
                 refreshData();
-                //$('#RegForm').hide();
-                //$('#LoginForm').show();
             }
         });
         });
     });
-
-    $('#register').click(function (e) {
-        $('#RegForm').show();
-        $('#LoginForm').hide();
-        return;
-    });
-
-    $('#cancel').click(function (e) {
+    
+    $('#log').click(function (e) {
         refreshData();
-        toastr["info"]("You will be redirected to Home Page!!!!!", "Information");
-        //alert('You will be redirected to Home Page!!!!!');
-        $('#RegForm').hide();
-        $('#LoginForm').show();
         return;
     });
-
-    $('#login').click(function (e) {
-        $('#RegForm').hide();
-        $('#LoginForm').show();
-    });
-
-
+    
     function refreshData() {
         $('#user_name').val("");
         $('#dob').val("");
@@ -216,57 +216,40 @@
         var confirm_password = $('#confirm_password').val();
         var phone_number = $('#phone_number').val();
         var Address = $('#Address').val();
-
         //Validations
         if (user_name == null || user_name == "") {
-            toastr["info"]("Please fill your name", "Info");
-            //alert("User Name can't be blank ");
+            toastr["info"]("Please fill your name", "Info");            
             return false;
         }
-
-        //if (validateEmail(mail_id)) {
-        //    alert('Nice!! your Email is valid, now you can continue..');
-        //}
-        //else {
-        //    alert('Invalid Email Address');
-        //    return false;
-        //}
         if (dob == null || dob == "") {
-            toastr["info"]("Pick the date", "Info");
-            //alert("Pick the date");
+            toastr["info"]("Pick the date", "Info");            
             return false;
         }
 
         if (mail_id == null || mail_id == "") {
             toastr["info"]("Enter the mail id", "Info");
-            //alert("Enter the mail id");
             return false;
         }
 
         if (password == null || password == "") {
             toastr["info"]("Password can't be blank", "Info");
-            //alert("Password can't be blank ");
             return false;
         }
         if (confirm_password == null || confirm_password == "") {
             toastr["info"]("ConfirmPassword can't be blank", "Info");
-            //alert("ConfirmPassword can't be blank ");
             return false;
         }
         if (phone_number == null || phone_number == "") {
             toastr["info"]("Enter the phone number", "Info");
-            //alert("enter the phone number");
             return false;
         }
         if (isNaN(phone_number)) {
             toastr["warning"]("Phone Number  is not valid", "Info");
-            //alert("Phone_Number  is not a number ");
             return false;
         }
 
         if (Address == null || Address == "") {
             toastr["info"]("Address can't be blank", "Info");
-            //alert("Address can't be blank");
             return false;
         }
 
@@ -277,24 +260,18 @@
             success: function (data) {
                 if (data.status == "Success") {
                     toastr["success"]("Registration is done!!!", "Success");
-
                     //alert("Done");
                     refreshData();
                     $('#RegForm').hide();
                     $('#LoginForm').show();
                 } else {
                     toastr["info"]("Error occurs on the Database level!", "Info");
-                    //alert("Error occurs on the Database level!");
                 }
             },
             error: function () {
                 toastr["info"]("Error occurs on the Database level!", "Info");
-                //alert("Error occurs on the Database level!");
                 refreshData();
-                //$('#RegForm').hide();
-                //$('#LoginForm').show();
             }
         });
     });
- 
 </script>

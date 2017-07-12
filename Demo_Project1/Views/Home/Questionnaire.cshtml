@@ -97,6 +97,7 @@
 		        success: function (data) {
 		            $('<p> Right Answers : ' + data.rAns + ' Wrong Answers : ' + data.wans + '</p>').appendTo('#Answer');
 		            $("#getCodeModal").modal('show');
+		            
 		            if (data.rAns >= 12) {
 		                $('<p> You Passed....Congrats!!!!!!!!!!!! </p>').appendTo('#Result');
 		            }
@@ -189,6 +190,10 @@
 
 				});
 
+            //$('#myModal').modal({
+            //    backdrop: 'static',
+            //    keyboard: false
+            //});
 
 		</script>
 
